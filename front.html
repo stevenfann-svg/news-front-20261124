@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tuesday 24 November 2026 - World News</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    width: 1024px;
+    height: 1024px;
+    overflow: hidden;
+    background-color: #faf6ed;
+    color: #161616;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Outer page boundary */
+  .page-frame {
+    width: 1024px;
+    height: 1024px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #faf6ed;
+    border: 3px solid #1a1a1a;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 1.5px 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    line-height: 1.0;
+  }
+  .badge-confirmed { background-color: #1a1a1a; color: #fff; }
+  .badge-official { background-color: #b91c1c; color: #fff; }
+  .badge-reported { background-color: #e5ded0; color: #111; border: 1px solid #777; }
+
+  /* 1. TOP KICKER */
+  .top-kicker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 18px;
+    border-bottom: 1.5px solid #111;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 800;
+    padding-bottom: 2px;
+  }
+  .kicker-left { color: #222; }
+  .kicker-right { color: #b91c1c; }
+
+  /* 2. MASTHEAD */
+  .masthead {
+    text-align: center;
+    padding: 2px 0 1px 0;
+  }
+  .masthead h1 {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 0.95;
+    color: #111;
+  }
+  .masthead-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: #444;
+    padding-top: 3px;
+    border-top: 1px solid #bbb;
+    margin-top: 3px;
+  }
+
+  /* 3. DAY IN UTC STRIP */
+  .utc-strip {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    background-color: #f1ebd9;
+    border: 1px solid #222;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+  .utc-tag {
+    background-color: #b91c1c;
+    color: #fff;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    padding: 2px 6px;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  .utc-flow {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    font-size: 11px;
+    color: #222;
+  }
+  .utc-node {
+    white-space: nowrap;
+  }
+  .utc-time {
+    font-weight: 800;
+    color: #111;
+  }
+  .utc-sep {
+    color: #888;
+    padding: 0 1px;
+  }
+
+  /* 4. LEADS ROW (3 COLUMNS) */
+  .leads-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    height: 220px;
+    border-bottom: 2px solid #111;
+    padding-bottom: 4px;
+  }
+  .lead-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 4px;
+  }
+  .lead-col:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc;
+  }
+  .lead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+  .lead-source {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+  }
+  .lead-title {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 4px;
+    height: 38px;
+  }
+  .lead-svg-box {
+    width: 100%;
+    height: 76px;
+    background-color: #f3eee0;
+    border: 1px solid #333;
+    margin-bottom: 4px;
+    overflow: hidden;
+  }
+  .lead-deck {
+    font-size: 11.5px;
+    line-height: 1.25;
+    color: #222;
+  }
+  .lead-deck strong {
+    color: #b91c1c;
+  }
+
+  /* 5. MID SECTION: 8 DISPATCHES GRID + SIDEBAR */
+  .mid-section {
+    display: grid;
+    grid-template-columns: 624px 360px;
+    gap: 12px;
+    height: 455px;
+    border-bottom: 2px solid #111;
+    padding-bottom: 4px;
+  }
+
+  /* Left: 8 Dispatches */
+  .dispatches-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .section-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 18px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .section-hdr .hdr-tag {
+    color: #fca5a5;
+  }
+  .dispatches-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 102px);
+    gap: 6px;
+  }
+  .dispatch-card {
+    background-color: #f6f1e3;
+    border: 1px solid #b5ad9a;
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 102px;
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-pill {
+    font-size: 11px;
+    font-weight: 800;
+    color: #b91c1c;
+    background-color: #fce8e8;
+    padding: 1px 4px;
+    border: 1px solid #f87171;
+    border-radius: 2px;
+  }
+  .card-headline {
+    font-family: Georgia, serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111;
+  }
+  .card-detail {
+    font-size: 11px;
+    line-height: 1.2;
+    color: #2b2b2b;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+    border-top: 1px dotted #ccc;
+    padding-top: 1px;
+  }
+
+  /* Right Sidebar */
+  .sidebar-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  /* Map Box */
+  .map-box {
+    background-color: #f2ede0;
+    border: 1px solid #222;
+    padding: 3px;
+    height: 178px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .map-hdr {
+    background-color: #333;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 2px 5px;
+    height: 16px;
+    line-height: 12px;
+  }
+  .map-svg-wrap {
+    width: 352px;
+    height: 118px;
+    background-color: #f7f3e8;
+    border: 1px solid #ccc;
+  }
+  .map-legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 11px;
+    color: #222;
+    font-weight: 700;
+    line-height: 1.2;
+    padding: 1px 2px;
+  }
+
+  /* Date Check Box */
+  .date-check-box {
+    border: 2px solid #b91c1c;
+    background-color: #fffdfa;
+    padding: 4px 6px;
+    height: 268px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .date-check-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #b91c1c;
+    padding-bottom: 2px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #b91c1c;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .date-check-body {
+    font-size: 11px;
+    line-height: 1.22;
+    color: #222;
+  }
+  .date-check-body strong {
+    color: #111;
+  }
+  .date-check-list {
+    margin-left: 14px;
+    margin-top: 1px;
+    margin-bottom: 2px;
+  }
+  .date-check-list li {
+    margin-bottom: 1px;
+  }
+  .not-yet-strip {
+    background-color: #fef2f2;
+    border-left: 3px solid #b91c1c;
+    padding: 2px 4px;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #222;
+  }
+
+  /* 6. ALSO ON TUESDAY BRIEFS */
+  .also-block {
+    display: flex;
+    flex-direction: column;
+    height: 106px;
+    justify-content: space-between;
+  }
+  .also-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #111;
+    border-bottom: 1.5px solid #222;
+    padding-bottom: 1px;
+    height: 15px;
+  }
+  .also-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    height: 88px;
+  }
+  .also-card {
+    background-color: #f5f0e3;
+    border: 1px solid #bbb;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88px;
+  }
+  .also-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .also-num {
+    font-weight: 900;
+    color: #b91c1c;
+    font-size: 11px;
+  }
+  .also-head {
+    font-family: Georgia, serif;
+    font-weight: 800;
+    color: #111;
+    font-size: 11.5px;
+    line-height: 1.15;
+    margin-top: 1px;
+  }
+  .also-body {
+    font-size: 11px;
+    line-height: 1.2;
+    color: #222;
+  }
+  .also-source {
+    color: #555;
+    font-size: 11px;
+    font-weight: 700;
+    border-top: 1px dotted #ccc;
+    padding-top: 1px;
+  }
+
+  /* 7. FOOTER */
+  .footer {
+    border-top: 2px solid #111;
+    padding-top: 2px;
+    height: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #333;
+  }
+  .footer-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+  }
+  .footer-row2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #444;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-frame">
+
+  <!-- 1. TOP KICKER -->
+  <div class="top-kicker">
+    <div class="kicker-left">ONE DAY OF WORLD NEWS, ONE PICTURE</div>
+    <div class="kicker-right">16 STORIES · 7 REGIONS · 11 FIELDS · ALL FROM THIS TUESDAY</div>
+  </div>
+
+  <!-- 2. MASTHEAD -->
+  <div class="masthead">
+    <h1>Tuesday 24 November 2026</h1>
+    <div class="masthead-sub">
+      <span>FIRST EDITION · ASIA-PACIFIC MORNING &amp; GLOBAL WIRE (00:00–03:30 UTC)</span>
+      <span>INDEX NO. 20261124 · VERIFIED FACTS ONLY</span>
+      <span>ALL STORIES ATTRIBUTED TO CREDITED SOURCES</span>
+    </div>
+  </div>
+
+  <!-- 3. DAY IN UTC STRIP -->
+  <div class="utc-strip">
+    <div class="utc-tag">THE DAY IN UTC</div>
+    <div class="utc-flow">
+      <div class="utc-node"><span class="utc-time">00:00</span> SG GDP +6.1%</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">00:30</span> ROK Jets Scramble</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">00:35</span> JP Flash PMI 53.7</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">01:28</span> AU–SG Treaties</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">01:32</span> Nepal M5.3 Quake</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">02:20</span> KOSPI Tops 5,000</div>
+      <div class="utc-sep">|</div>
+      <div class="utc-node"><span class="utc-time">02:26</span> AU 5% Tech Fine</div>
+    </div>
+  </div>
+
+  <!-- 4. LEADS ROW (3 COLUMNS) -->
+  <div class="leads-row">
+
+    <!-- LEAD 1: KOSPI 5,000 & CHIP SURGE -->
+    <div class="lead-col">
+      <div class="lead-top">
+        <span class="badge badge-confirmed">CONFIRMED</span>
+        <span class="lead-source">Yonhap · CNBC · CNA</span>
+      </div>
+      <div class="lead-title">Asian Chip Stocks Surge: Seoul's KOSPI Tops 5,000 for First Time Intraday</div>
+      <div class="lead-svg-box">
+        <svg width="300" height="76" viewBox="0 0 300 76">
+          <line x1="10" y1="18" x2="290" y2="18" stroke="#d5cebe" stroke-width="1" stroke-dasharray="3,3" />
+          <line x1="10" y1="40" x2="290" y2="40" stroke="#d5cebe" stroke-width="1" stroke-dasharray="3,3" />
+          <line x1="10" y1="26" x2="200" y2="26" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4,2" />
+          <text x="14" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#b91c1c">5,000 MILESTONE CROSSED</text>
+          <rect x="216" y="8" width="68" height="58" fill="#ebe4d2" stroke="#222" stroke-width="1.5" rx="3" />
+          <line x1="216" y1="20" x2="209" y2="20" stroke="#222" stroke-width="2" />
+          <line x1="216" y1="36" x2="209" y2="36" stroke="#222" stroke-width="2" />
+          <line x1="216" y1="52" x2="209" y2="52" stroke="#222" stroke-width="2" />
+          <line x1="284" y1="20" x2="291" y2="20" stroke="#222" stroke-width="2" />
+          <line x1="284" y1="36" x2="291" y2="36" stroke="#222" stroke-width="2" />
+          <line x1="284" y1="52" x2="291" y2="52" stroke="#222" stroke-width="2" />
+          <text x="250" y="27" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="900" fill="#111" text-anchor="middle">KOSPI</text>
+          <text x="250" y="44" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="900" fill="#b91c1c" text-anchor="middle">5,023.58</text>
+          <text x="250" y="58" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#111" text-anchor="middle">+6.69%</text>
+          <polyline points="15,62 48,58 85,54 120,48 150,38 180,24 198,12" fill="none" stroke="#111" stroke-width="2.5" />
+          <polygon points="196,8 206,12 198,17" fill="#b91c1c" />
+          <circle cx="180" cy="24" r="3.5" fill="#b91c1c" />
+          <text x="14" y="70" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#333">Samsung +7.7% · SK hynix +8.5%</text>
+        </svg>
+      </div>
+      <div class="lead-deck">
+        Benchmark surged <strong>+6.69% to 5,023.58 intraday</strong> at 11:20 Seoul; KRX triggered buy-side sidecar. Taiwan chipmakers neared 10% daily limits.
+      </div>
+    </div>
+
+    <!-- LEAD 2: NEPAL M5.3 EARTHQUAKE -->
+    <div class="lead-col">
+      <div class="lead-top">
+        <span class="badge badge-official">OFFICIAL</span>
+        <span class="lead-source">USGS · Hindustan Times</span>
+      </div>
+      <div class="lead-title">Himalayan Temblor: Magnitude 5.3 Earthquake Strikes Koshi, Nepal</div>
+      <div class="lead-svg-box">
+        <svg width="300" height="76" viewBox="0 0 300 76">
+          <polygon points="15,50 65,16 110,50" fill="#dfd8c7" stroke="#222" stroke-width="1.5" />
+          <polygon points="85,50 140,10 190,50" fill="#cdc4b0" stroke="#222" stroke-width="1.5" />
+          <polygon points="165,50 205,22 240,50" fill="#dfd8c7" stroke="#222" stroke-width="1.5" />
+          <circle cx="140" cy="42" r="4" fill="#b91c1c" />
+          <circle cx="140" cy="42" r="11" fill="none" stroke="#b91c1c" stroke-width="1.2" stroke-dasharray="3,2" />
+          <circle cx="140" cy="42" r="20" fill="none" stroke="#b91c1c" stroke-width="1.0" stroke-dasharray="4,3" />
+          <polyline points="220,34 232,34 237,22 242,48 247,14 252,44 257,26 262,36 285,34" fill="none" stroke="#111" stroke-width="1.8" />
+          <text x="252" y="12" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="900" fill="#b91c1c" text-anchor="middle">M 5.3</text>
+          <text x="20" y="14" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#111">01:32:42 UTC · 10 KM DEPTH</text>
+          <text x="14" y="68" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#333">Shook Koshi Province, Sikkim &amp; Bhutan</text>
+        </svg>
+      </div>
+      <div class="lead-deck">
+        USGS recorded quake at <strong>01:32 UTC at ~10 km depth</strong> in Koshi Province. Strong tremors felt across eastern India and Bhutan; no casualty toll published.
+      </div>
+    </div>
+
+    <!-- LEAD 3: AUSTRALIA 5% TECH FINES -->
+    <div class="lead-col">
+      <div class="lead-top">
+        <span class="badge badge-confirmed">CONFIRMED</span>
+        <span class="lead-source">ABC News · CNA</span>
+      </div>
+      <div class="lead-title">Tech Fines Deal: Australia Sets Penalties Up to 5% of Global Revenue</div>
+      <div class="lead-svg-box">
+        <svg width="300" height="76" viewBox="0 0 300 76">
+          <rect x="18" y="10" width="85" height="42" fill="#ebe4d2" stroke="#222" stroke-width="1.5" rx="3" />
+          <line x1="60" y1="52" x2="60" y2="58" stroke="#222" stroke-width="2" />
+          <line x1="45" y1="58" x2="75" y2="58" stroke="#222" stroke-width="2" />
+          <text x="60" y="27" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#111" text-anchor="middle">DIGITAL DUTY</text>
+          <text x="60" y="42" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#444" text-anchor="middle">OF CARE BILL</text>
+          <line x1="150" y1="14" x2="150" y2="48" stroke="#111" stroke-width="2" />
+          <line x1="125" y1="20" x2="175" y2="20" stroke="#111" stroke-width="2" />
+          <polygon points="125,20 117,34 133,34" fill="#dfd8c7" stroke="#111" stroke-width="1.2" />
+          <polygon points="175,20 167,34 183,34" fill="#dfd8c7" stroke="#111" stroke-width="1.2" />
+          <rect x="195" y="10" width="88" height="42" fill="#fce8e8" stroke="#b91c1c" stroke-width="1.8" rx="2" />
+          <text x="239" y="26" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="900" fill="#b91c1c" text-anchor="middle">MAX PENALTY</text>
+          <text x="239" y="43" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="900" fill="#b91c1c" text-anchor="middle">5% REVENUE</text>
+          <text x="18" y="70" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#333">Right to Sue Platforms Granted to Citizens</text>
+        </svg>
+      </div>
+      <div class="lead-deck">
+        Labor–Greens accord announced by Minister Anika Wells at <strong>02:26 UTC</strong>. Imposes penalties on global turnover and gives citizens statutory right to sue.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 5. MID SECTION: 8 DISPATCHES GRID + SIDEBAR -->
+  <div class="mid-section">
+
+    <!-- LEFT: 8 DISPATCHES -->
+    <div class="dispatches-block">
+      <div class="section-hdr">
+        <span>GLOBAL DISPATCHES GRID · CRUCIAL DEVELOPMENTS</span>
+        <span class="hdr-tag">8 FIELD STORIES</span>
+      </div>
+
+      <div class="dispatches-grid">
+
+        <!-- 4: Korea Jets Scramble -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-official">OFFICIAL</span>
+            <span class="card-pill">EAST ASIA · DEFENCE</span>
+          </div>
+          <div class="card-headline">ROK Scrambles Jets on Russian Aircraft</div>
+          <div class="card-detail">Fighter jets scrambled after Russian military planes entered Korea's air defence zone (~00:30 UTC); Ulleung siren sounded 3 min.</div>
+          <div class="card-meta">
+            <span>No airspace breach</span>
+            <span>JCS · Reuters</span>
+          </div>
+        </div>
+
+        <!-- 5: Singapore GDP -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-official">OFFICIAL</span>
+            <span class="card-pill">SE ASIA · +6.1% GDP</span>
+          </div>
+          <div class="card-headline">Singapore Q3 GDP Surges 6.1% on Tech</div>
+          <div class="card-detail">MTI release at 00:00 UTC raises 2026 forecast to ~6.0% on chip exports; 2027 forecast guided at 2.5%–4.5%.</div>
+          <div class="card-meta">
+            <span>MTI release 08:00 SGT</span>
+            <span>CNA</span>
+          </div>
+        </div>
+
+        <!-- 6: StarHub & M1 Merger -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-official">OFFICIAL</span>
+            <span class="card-pill">SE ASIA · S$1.36B</span>
+          </div>
+          <div class="card-headline">StarHub &amp; M1 Agree All-Share Merger</div>
+          <div class="card-detail">Keppel to take ~23% in StarHub in S$1.36bn deal; StarHub also acquiring Circles.Life; targeted completion H1 2027.</div>
+          <div class="card-meta">
+            <span>Announced ~00:18 UTC</span>
+            <span>Statements</span>
+          </div>
+        </div>
+
+        <!-- 7: Australia AI Probe -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-reported">REPORTED</span>
+            <span class="card-pill">OCEANIA · AI PROBE</span>
+          </div>
+          <div class="card-headline">Iran AI Network Targeted Australians</div>
+          <div class="card-detail">ABC investigation (00:56 UTC) reveals Tehran-linked campaign used ChatGPT to build fake "journalists" pushing war narratives.</div>
+          <div class="card-meta">
+            <span>Foreign influence probe</span>
+            <span>ABC News</span>
+          </div>
+        </div>
+
+        <!-- 8: Gaza Strike -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-reported">REPORTED</span>
+            <span class="card-pill">MID EAST · 3 CASUALTIES</span>
+          </div>
+          <div class="card-headline">Israeli Strike in Gaza Kills 3 at Post</div>
+          <div class="card-detail">Airstrike near a police outpost in Khan Younis leaves at least 3 Palestinians dead and 5 wounded on Tuesday morning.</div>
+          <div class="card-meta">
+            <span>Local health officials</span>
+            <span>Reuters</span>
+          </div>
+        </div>
+
+        <!-- 9: Japan PMI -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-official">OFFICIAL</span>
+            <span class="card-pill">EAST ASIA · PMI 53.7</span>
+          </div>
+          <div class="card-headline">Japan Flash Manufacturing Expands</div>
+          <div class="card-detail">November factory PMI rose to 53.7 (~00:35 UTC) propelled by robust global semiconductor and electronic components demand.</div>
+          <div class="card-meta">
+            <span>S&amp;P Global survey</span>
+            <span>CNA</span>
+          </div>
+        </div>
+
+        <!-- 10: India RBI Anti-Fraud -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-reported">REPORTED</span>
+            <span class="card-pill">SOUTH ASIA · BANKING</span>
+          </div>
+          <div class="card-headline">RBI Mandates Stop Switch for Fraud</div>
+          <div class="card-detail">Reserve Bank of India proposed mandatory "trusted approver" protocols and emergency stop switch to halt fraudulent digital transfers.</div>
+          <div class="card-meta">
+            <span>Published ~00:33 UTC</span>
+            <span>Times of India</span>
+          </div>
+        </div>
+
+        <!-- 11: Australia-Singapore Pacts -->
+        <div class="dispatch-card">
+          <div class="card-top">
+            <span class="badge badge-official">OFFICIAL</span>
+            <span class="card-pill">OCEANIA · 2 ACCORDS</span>
+          </div>
+          <div class="card-headline">Albanese &amp; Wong Ink Bilateral Treaties</div>
+          <div class="card-detail">Canberra summit (~01:28 UTC) concludes two formal pacts on securing essential supply chains and cross-border carbon capture.</div>
+          <div class="card-meta">
+            <span>Canberra bilateral</span>
+            <span>PM Media</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: MAP & DATE CHECK -->
+    <div class="sidebar-block">
+
+      <!-- Map Box -->
+      <div class="map-box">
+        <div class="map-hdr">WHERE IT HAPPENED · GEOGRAPHIC DISTRIBUTION</div>
+        <div class="map-svg-wrap">
+          <svg width="352" height="118" viewBox="0 0 352 118">
+            <!-- World Continents Base -->
+            <!-- North America -->
+            <path d="M 16,14 C 30,10 55,8 80,12 C 92,16 92,26 84,34 C 74,40 68,42 60,50 C 56,56 46,56 38,48 C 30,40 20,30 16,14 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <path d="M 90,6 Q 104,6 108,14 Q 98,18 90,12 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- South America -->
+            <path d="M 54,58 C 66,56 76,64 78,74 C 80,88 72,104 64,108 C 58,106 52,90 50,78 C 48,68 50,60 54,58 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- Europe -->
+            <path d="M 146,16 C 160,12 172,14 174,22 C 170,30 160,32 150,34 C 142,32 142,24 146,16 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <path d="M 162,8 C 170,6 172,14 168,18 C 164,16 162,10 162,8 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- Africa -->
+            <path d="M 144,38 C 170,36 184,44 188,56 C 192,72 180,92 168,102 C 160,100 150,86 146,70 C 138,62 138,50 144,38 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- Asia & Siberia -->
+            <path d="M 176,14 C 208,8 266,8 288,16 C 296,24 284,34 272,36 C 260,34 248,30 234,36 C 218,38 196,32 183,24 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- South Asia / India -->
+            <path d="M 216,38 C 228,38 232,46 226,58 C 220,62 214,52 216,38 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- East Asia / China -->
+            <path d="M 242,32 C 263,30 273,36 268,48 C 258,50 246,46 242,32 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- Japan -->
+            <path d="M 284,28 C 288,32 286,40 282,42 C 280,38 282,32 284,28 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- Southeast Asia -->
+            <path d="M 244,48 C 256,48 260,56 254,66 C 248,66 244,58 244,48 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <path d="M 246,68 Q 266,70 276,72" stroke="#666" stroke-width="1.5" />
+            <!-- Australia -->
+            <path d="M 274,74 C 296,72 310,76 312,88 C 308,100 288,102 278,94 C 272,86 272,78 274,74 Z" fill="#dfd7c3" stroke="#666" stroke-width="0.8" />
+            <!-- New Zealand -->
+            <path d="M 322,96 C 326,100 324,106 320,108" stroke="#555" stroke-width="2" />
+
+            <!-- 16 EVENT NUMBER PINS -->
+            <!-- 1: Seoul KOSPI (Lead 1) -->
+            <circle cx="274" cy="36" r="5" fill="#b91c1c" />
+            <text x="274" y="39.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">1</text>
+
+            <!-- 2: Nepal Quake (Lead 2) -->
+            <circle cx="227" cy="42" r="5" fill="#b91c1c" />
+            <text x="227" y="45.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">2</text>
+
+            <!-- 3: Canberra AU Tech Fine (Lead 3) -->
+            <circle cx="304" cy="94" r="5" fill="#b91c1c" />
+            <text x="304" y="97.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">3</text>
+
+            <!-- 4: Korea Jets / Ulleung -->
+            <circle cx="282" cy="35" r="4" fill="#111" />
+            <text x="282" y="38.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">4</text>
+
+            <!-- 5: Singapore GDP -->
+            <circle cx="251" cy="66" r="4" fill="#111" />
+            <text x="251" y="69.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">5</text>
+
+            <!-- 6: Singapore M1 Deal -->
+            <circle cx="245" cy="72" r="4" fill="#111" />
+            <text x="245" y="75.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">6</text>
+
+            <!-- 7: Australia AI Probe -->
+            <circle cx="292" cy="86" r="4" fill="#111" />
+            <text x="292" y="89.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">7</text>
+
+            <!-- 8: Gaza Strike -->
+            <circle cx="186" cy="45" r="4" fill="#111" />
+            <text x="186" y="48.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">8</text>
+
+            <!-- 9: Japan PMI -->
+            <circle cx="290" cy="38" r="4" fill="#111" />
+            <text x="290" y="41.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">9</text>
+
+            <!-- 10: India RBI Anti-Fraud -->
+            <circle cx="221" cy="52" r="4" fill="#111" />
+            <text x="221" y="55.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">10</text>
+
+            <!-- 11: AU-SG Summit -->
+            <circle cx="308" cy="99" r="4" fill="#111" />
+            <text x="308" y="102.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">11</text>
+
+            <!-- 12: Israel Flydubai -->
+            <circle cx="194" cy="42" r="4" fill="#111" />
+            <text x="194" y="45.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">12</text>
+
+            <!-- 13: Egypt Al Ahly -->
+            <circle cx="176" cy="46" r="4" fill="#111" />
+            <text x="176" y="49.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">13</text>
+
+            <!-- 14: NZ Cricket -->
+            <circle cx="324" cy="102" r="4" fill="#111" />
+            <text x="324" y="105.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">14</text>
+
+            <!-- 15: Nigeria Borno -->
+            <circle cx="160" cy="58" r="4" fill="#111" />
+            <text x="160" y="61.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">15</text>
+
+            <!-- 16: New York Emmys -->
+            <circle cx="78" cy="28" r="4" fill="#111" />
+            <text x="78" y="31.5" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">16</text>
+          </svg>
+        </div>
+        <div class="map-legend">
+          <div>● East Asia: 1, 4, 9</div>
+          <div>● SE Asia: 5, 6</div>
+          <div>● South Asia: 2, 10</div>
+          <div>● Oceania: 3, 7, 11, 14</div>
+          <div>● Middle East: 8, 12</div>
+          <div>● Africa: 13, 15 | Global: 16</div>
+        </div>
+      </div>
+
+      <!-- Date Check Box -->
+      <div class="date-check-box">
+        <div class="date-check-hdr">
+          <span>DATE CHECK · EDITORIAL FILTER</span>
+          <span>STRICT 24 NOV</span>
+        </div>
+        <div class="date-check-body">
+          <strong>Left out on purpose, first reported before Tuesday:</strong>
+          <ul class="date-check-list">
+            <li>Nvidia reinstates Jensen Huang; Trump deal comment (23 Nov)</li>
+            <li>US adds Megaspeed to export blacklist (23 Nov 22:35 UTC)</li>
+            <li>IRGC claims 3 tankers struck mines in Hormuz (23 Nov 21:19 UTC)</li>
+            <li>Zelensky calls for 4-way peace talks in Berlin (23 Nov)</li>
+            <li>Prabowo names Sugiono &amp; Amran as VP picks (23 Nov)</li>
+            <li>China sentences official Ma to death for espionage (23 Nov)</li>
+            <li>Indonesia candy plant fire (24 killed) · Libya drone strike (23 Nov)</li>
+            <li>Moscow Estonia warning · COP31 fossil deadlock · WWC hosts (23 Nov)</li>
+            <li>South Korea President Lee cabinet reshuffle (23 Nov)</li>
+          </ul>
+        </div>
+        <div class="not-yet-strip">
+          <strong>Not yet (pending after 03:30 UTC):</strong> UEFA Champions League Matchday 5 (tonight) · Indonesia MPR VP vote (11 Dec) · StarHub deal close (H1 2027).
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 6. ALSO ON TUESDAY BRIEFS -->
+  <div class="also-block">
+    <div class="also-hdr">
+      <span>ALSO ON TUESDAY 24 NOVEMBER · REMAINING FIRST-REPORTED GLOBAL BRIEFS</span>
+      <span>00:00–03:30 UTC WIRE</span>
+    </div>
+    <div class="also-grid">
+
+      <!-- Brief 12: Israel Flydubai -->
+      <div class="also-card">
+        <div class="also-card-top">
+          <span class="also-num">12.</span>
+          <span class="badge badge-reported">REPORTED</span>
+        </div>
+        <div class="also-head">Israel: Flydubai Return</div>
+        <div class="also-body">Transport minister approves resumption of Dubai–Tel Aviv flights pending security review.</div>
+        <div class="also-source">Al Jazeera · 01:09 UTC</div>
+      </div>
+
+      <!-- Brief 13: Egypt Al Ahly -->
+      <div class="also-card">
+        <div class="also-card-top">
+          <span class="also-num">13.</span>
+          <span class="badge badge-confirmed">CONFIRMED</span>
+        </div>
+        <div class="also-head">Al Ahly Sacks Coach</div>
+        <div class="also-body">Hussein Ammouta sacked Tuesday after 2-0 loss to Pyramids leaves club 7 pts adrift.</div>
+        <div class="also-source">Reuters / CNA · ~02:00 UTC</div>
+      </div>
+
+      <!-- Brief 14: NZ Cricket -->
+      <div class="also-card">
+        <div class="also-card-top">
+          <span class="also-num">14.</span>
+          <span class="badge badge-confirmed">CONFIRMED</span>
+        </div>
+        <div class="also-head">NZ Cricket: Tickner Out</div>
+        <div class="also-body">Pace bowler ruled out of 2nd Test vs India (hamstring); Matt Fisher called up as replacement.</div>
+        <div class="also-source">CNA · 00:02 UTC</div>
+      </div>
+
+      <!-- Brief 15: Nigeria Borno Schools -->
+      <div class="also-card">
+        <div class="also-card-top">
+          <span class="also-num">15.</span>
+          <span class="badge badge-reported">REPORTED</span>
+        </div>
+        <div class="also-head">Borno School Enrolment</div>
+        <div class="also-body">Classroom enrolment nearly doubles in Borno State following years of Boko Haram conflict.</div>
+        <div class="also-source">Al Jazeera · 00:02 UTC</div>
+      </div>
+
+      <!-- Brief 16: International Emmys -->
+      <div class="also-card">
+        <div class="also-card-top">
+          <span class="also-num">16.</span>
+          <span class="badge badge-confirmed">CONFIRMED</span>
+        </div>
+        <div class="also-head">International Emmys</div>
+        <div class="also-body">Sky News' 'Kill Zone' wins Best News; TV Globo wins 3 awards announced in NY ~01:30 UTC.</div>
+        <div class="also-source">Sky News · ~01:30 UTC</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. FOOTER -->
+  <div class="footer">
+    <div class="footer-row1">
+      <div>Every story happened or was first reported on Tue 24 Nov 2026; claims attributed.</div>
+      <div>
+        <strong>BADGES:</strong>
+        <span class="badge badge-confirmed">CONFIRMED</span> 2+ Outlets &nbsp;·&nbsp;
+        <span class="badge badge-official">OFFICIAL</span> Agency/Gov &nbsp;·&nbsp;
+        <span class="badge badge-reported">REPORTED</span> Single Wire
+      </div>
+    </div>
+    <div class="footer-row2">
+      <div><strong>REGIONS:</strong> East Asia · Southeast Asia · South Asia · Oceania · Middle East · Africa · Global</div>
+      <div><strong>SOURCES:</strong> Yonhap · Reuters · CNBC · CNA · USGS · TOI · ABC News · S&amp;P Global · Al Jazeera · Sky News</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

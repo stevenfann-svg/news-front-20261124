@@ -1,0 +1,1 @@
+& "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=1024,1024 --screenshot="$PWD\entry.png" "file:///$($PWD -replace '\\','/')/front.html"
